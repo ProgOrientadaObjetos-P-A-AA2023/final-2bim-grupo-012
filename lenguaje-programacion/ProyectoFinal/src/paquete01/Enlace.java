@@ -22,7 +22,7 @@ public class Enlace {
     public void establecerConexion() {
         try {
             // db parameters  
-            String url = "jdbc:sqlite:db/clientes.db";
+            String url = "jdbc:sqlite:db/clientes.bd";
             // create a connection to the database  
             conn = DriverManager.getConnection(url);
             // System.out.println(conn.isClosed());
@@ -87,5 +87,6 @@ public class Enlace {
         }
         return lista;
     }
+    
 
 }
