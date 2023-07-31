@@ -2,185 +2,228 @@ package paquete01;
 
 import java.util.Scanner;
 import java.util.ArrayList;
+import java.util.Locale;
+import paquete02.PlanCelular;
+import paquete02.PlanPostPagoMegas;
+import paquete02.PlanPostPagoMinutos;
+import paquete02.PlanPostPagoMinutosMegas;
+import paquete02.PlanPostPagoMinutosMegasEconomico;
+import paquete02.Cliente;
+
+import paquete03.Enlace;
 
 public class Inicio {
 
     public static void main(String[] args) {
-        try (Scanner scanner = new Scanner(System.in)) {
-            Enlace enlace = new Enlace();
-            enlace.establecerConexion();
+        Enlace c = new Enlace();
 
-            // Ciclo repetitivo para crear objetos de Planes de celular
-            while (true) {
-                System.out.println("Ingrese el tipo de plan (1, 2, 3, 4):");
-                System.out.println("1. PlanPostPagoMinutos");
-                System.out.println("2. PlanPostPagoMegas");
-                System.out.println("3. PlanPostPagoMinutosMegas");
-                System.out.println("4. PlanPostPagoMinutosMegasEconomico");
-                System.out.println("0. Salir");
+        Scanner sc = new Scanner(System.in);
+        sc.useLocale(Locale.US);
+        int opcion = 1, opcion2;
+        String nombre, apellido, pasaporte, barrio, ciudad, marca, modelo, numeroCelular;
+        do {
+            System.out.printf("----------------Menú----------------------+\n"
+                    + "1---------- Ingresar un Plan Celular                         \n"
+                    + "2---------- Presentar los Planes Registrados                       \n"
+                    + "0----------  Salir                                         \n"
+                    + "Seleccione Una Opción+\n");
+            opcion = sc.nextInt();
 
-                int opcion = scanner.nextInt();
-                scanner.nextLine();
+            System.out.println("--------------------------------------------------");
 
-                if (opcion == 0) {
-                    break;
-                }
+            if (opcion == 1) {
+                do {
 
-                switch (opcion) {
+                    opcion2 = interfaz1();
+                    sc.nextLine();
+                    System.out.println("Datos del Cliente");
+                    System.out.print("\tIngrese el nombre: ");
+                    nombre = sc.nextLine();
+                    System.out.print("\tIngrese el apellido: ");
+                    apellido = sc.nextLine();
+                    System.out.print("\tIngrese el pasaporte: ");
+                    pasaporte = sc.nextLine();
+                    System.out.print("\tIngrese la ciudad: ");
+                    ciudad = sc.nextLine();
+                    System.out.print("\tIngrese el barrio: ");
+                    barrio = sc.nextLine();
+                    System.out.print("\tIngrese la marca del celular: ");
+                    marca = sc.next();
+                    sc.nextLine();
+                    System.out.print("\tIngrese el modelo del celular: ");
+                    modelo = sc.nextLine();
+                    System.out.print("\tIngrese el número del celular: ");
+                    numeroCelular = sc.nextLine();
+
+                    Cliente p = new Cliente(nombre, apellido,
+                            pasaporte, ciudad,
+                            barrio, marca,
+                            modelo, numeroCelular);
+
+                    switch (opcion2) {
+
+                        case 1:
+                            System.out.print("Ingrese el  numero de minutos: ");
+                            double minutosSaldo2 = sc.nextDouble();
+                            System.out.print("Ingrese el costo de minutos: ");
+                            double costoMinutoSaldo2 = sc.nextDouble();
+                            System.out.print("Ingrese el número de Gigas: ");
+                            double gigaInternet3 = sc.nextDouble();
+                            System.out.print("Ingrese el costo de las gigas: ");
+                            double costoGiga3 = sc.nextDouble();
+                            System.out.print("Ingrese el porcentaje de descuento: ");
+                            double porcentaje = sc.nextDouble();
+
+                            PlanPostPagoMinutosMegasEconomico pPPMM = new PlanPostPagoMinutosMegasEconomico(
+                                    p,
+                                    minutosSaldo2, costoMinutoSaldo2,
+                                    gigaInternet3, costoGiga3,
+                                    porcentaje);
+
+                            c.insertarPlanPostPagoMinutosMegasEconomico(pPPMM);
+                            break;
+
+                        case 2:
+                            System.out.print("Ingrese el número de minutos Nacionales: ");
+                            double minutosNacionales = sc.nextDouble();
+                            System.out.print("Ingrese el costo de minuto Nacional: ");
+                            double costoMinutoNacional = sc.nextDouble();
+                            System.out.print("Ingrese el número de minutos Internacionales: ");
+                            double minutosInternacionales = sc.nextDouble();
+                            System.out.print("Ingrese el costo de minuto Internacional: ");
+                            double costoMinutoInternacional = sc.nextDouble();
+
+                            PlanPostPagoMinutos pPPMin = new PlanPostPagoMinutos(
+                                    p,
+                                    minutosNacionales, costoMinutoNacional,
+                                    minutosInternacionales, costoMinutoInternacional);
+
+                            c.insertarPlanPostPagoMinutos(pPPMin);
+                            break;
+                        case 3:
+
+                            System.out.print("Ingrese el número de Megas: ");
+                            double gigaInternet = sc.nextDouble();
+                            System.out.print("Ingrese el costo de las Gigas: ");
+                            double costoGiga = sc.nextDouble();
+                            System.out.print("Ingrese el valor de la tarifa base: ");
+                            double tarifaBase = sc.nextDouble();
+                            PlanPostPagoMegas pPPMe = new PlanPostPagoMegas(
+                                    p, gigaInternet,
+                                    costoGiga, tarifaBase);
+
+                            c.insertarPlanPostPagoMegas(pPPMe);
+                            break;
+
+                        case 4:
+                            System.out.print("Ingrese el numero de minutos: ");
+                            double minutosSaldo = sc.nextDouble();
+                            System.out.print("Ingrese el costo de minutos: ");
+                            double costoMinutoSaldo = sc.nextDouble();
+                            System.out.print("Ingrese el número de Gigas: ");
+                            double gigaInternet2 = sc.nextDouble();
+                            System.out.print("Ingrese el costo de las Gigas: ");
+                            double costoGiga2 = sc.nextDouble();
+                            PlanPostPagoMinutosMegas pPPMG = new PlanPostPagoMinutosMegas(
+                                    p,
+                                    minutosSaldo, costoMinutoSaldo,
+                                    gigaInternet2, costoGiga2);
+
+                            c.insertarPlanPostPagoMinutosMegas(pPPMG);
+                            break;
+
+                        default:
+                            break;
+                    }
+
+                    System.out.printf("--------------------------------------------------\n"
+                            + "¿Desea agregar otro plan?\n"
+                            + "1--------    Si     \n"
+                            + "0-------    No     \n"
+                            + "--------------------------------------------------\n");
+                    opcion2 = sc.nextInt();
+                    System.out.println("--------------------------------------------------");
+
+                } while (opcion2 != 0);
+
+            }
+            if (opcion == 2) {
+                int op3 = interfaz2();
+                switch (op3) {
                     case 1:
-                        System.out.println("Ingrese su nombre:");
-                        String n = scanner.nextLine();
-
-                        System.out.println("Ingrese su Pasaporte:");
-                        String p = scanner.nextLine();
-                        System.out.println("Ingrese su Ciudad: ");
-                        String c = scanner.nextLine();
-                        System.out.println("Ingrese su Barrio: :");
-                        String b = scanner.nextLine();
-                        System.out.println("Ingrese su marca de Celular:");
-                        String mC = scanner.nextLine();
-                        System.out.println("Ingrese su modelo de Celular:");
-                        String moC = scanner.nextLine();
-                        System.out.println("Ingrese su numero de Celular: :");
-                        String numC = scanner.nextLine();
-
-                        System.out.println("Ingrese los minutos Nacionales:");
-                        int minutos = scanner.nextInt();
-                        System.out.println("Ingrese el costo de los minutos nacional:");
-                        double costoMi = scanner.nextDouble();
-                        System.out.println("Ingrese los minutos Internacionales: ");
-                        int minInter = scanner.nextInt();
-                        System.out.println("Ingrese el costo de los minutos Internacionales:");
-                        double cMI = scanner.nextDouble();
-
-                        // Crear objeto del tipo PlanPostPagoMinutos
-                        PlanPostPagoMinutos planMinutos
-                                = new PlanPostPagoMinutos(n, p, c, b, mC, moC, numC,
-                                        minutos, costoMi, minInter, cMI);
-                        // planMinutos.calcularPagoMensual();
-                        // Guardar el objeto en la base de datos
-                        enlace.insertarCliente(planMinutos);
-
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutosMegasEconomico().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutosMegasEconomico().get(i));
+                        }
                         break;
-
                     case 2:
-                        System.out.println("Ingrese su nombre:");
-                        String n1 = scanner.nextLine();
-                        System.out.println("Ingrese su Pasaporte:");
-                        String p1 = scanner.nextLine();
-                        System.out.println("Ingrese su Ciudad: ");
-                        String c1 = scanner.nextLine();
-                        System.out.println("Ingrese su Barrio: :");
-                        String b1 = scanner.nextLine();
-                        System.out.println("Ingrese su marca de Celular:");
-                        String mC1 = scanner.nextLine();
-                        System.out.println("Ingrese su modelo de Celular:");
-                        String moC1 = scanner.nextLine();
-                        System.out.println("Ingrese su numero de Celular: :");
-                        String numC1 = scanner.nextLine();
-
-                        System.out.println("Ingrese las megas: ");
-                        double megas1 = scanner.nextDouble();
-                        System.out.println("Ingrese el costo por gigas:");
-                        double cG1 = scanner.nextDouble();
-                        System.out.println("Ingrese la tarifa Base:");
-                        double pD1 = scanner.nextDouble();
-                        // Crear objeto del tipo PlanPostPagoMegas
-                        PlanPostPagoMegas planMegas
-                                = new PlanPostPagoMegas(n1, p1, c1, b1, mC1,
-                                        moC1, numC1, megas1, cG1, pD1);
-                        planMegas.calcularPagoMensual();
-                        // Guardar el objeto en la base de datos
-                        enlace.insertarCliente(planMegas);
-
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutos().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutos().get(i));
+                        }
                         break;
-
                     case 3:
-                        System.out.println("Ingrese su nombre:");
-                        String n2 = scanner.nextLine();
-                        System.out.println("Ingrese su Pasaporte:");
-                        String p2 = scanner.nextLine();
-                        System.out.println("Ingrese su Ciudad: ");
-                        String c2 = scanner.nextLine();
-                        System.out.println("Ingrese su Barrio: :");
-                        String b2 = scanner.nextLine();
-                        System.out.println("Ingrese su marca de Celular:");
-                        String mC2 = scanner.nextLine();
-                        System.out.println("Ingrese su modelo de Celular:");
-                        String moC2 = scanner.nextLine();
-                        System.out.println("Ingrese su numero de Celular: :");
-                        String numC2 = scanner.nextLine();
-
-                        System.out.println("Ingrese los minutos :");
-                        int minutos1 = scanner.nextInt();
-                        System.out.println("Ingrese el costo de los minutos: ");
-                        double costoMi2 = scanner.nextDouble();
-                        System.out.println("Ingrese las megas: ");
-                        double megas2 = scanner.nextDouble();
-                        System.out.println("Ingrese el costo por gigas:");
-                        double cG2 = scanner.nextDouble();
-                        // Crear objeto del tipo PlanPostPagoMinutosMegas
-                        PlanPostPagoMinutosMegas planMinutosMegas
-                                = new PlanPostPagoMinutosMegas(n2, p2, c2, b2, mC2,
-                                        moC2, numC2, minutos1, costoMi2, megas2, cG2);
-                        planMinutosMegas.calcularPagoMensual();
-                        // Guardar el objeto en la base de datos
-                        enlace.insertarCliente(planMinutosMegas);
-
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMegas().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMegas().get(i));
+                        }
                         break;
-
                     case 4:
-                        System.out.println("Ingrese su nombre:");
-                        String n3 = scanner.nextLine();
-                        System.out.println("Ingrese su Pasaporte:");
-                        String p3 = scanner.nextLine();
-                        System.out.println("Ingrese su Ciudad: ");
-                        String c3 = scanner.nextLine();
-                        System.out.println("Ingrese su Barrio: :");
-                        String b3 = scanner.nextLine();
-                        System.out.println("Ingrese su marca de Celular:");
-                        String mC3 = scanner.nextLine();
-                        System.out.println("Ingrese su modelo de Celular:");
-                        String moC3 = scanner.nextLine();
-                        System.out.println("Ingrese su numero de Celular: :");
-                        String numC3 = scanner.nextLine();
-
-                        System.out.println("Ingrese los minutos :");
-                        int minutos3 = scanner.nextInt();
-                        System.out.println("Ingrese el costo de los minutos: ");
-                        double costoMi3 = scanner.nextDouble();
-                        System.out.println("Ingrese las megas: ");
-                        double megas3 = scanner.nextDouble();
-                        System.out.println("Ingrese el costo por gigas:");
-                        double cG3 = scanner.nextDouble();
-                        System.out.println("Ingrese el porcentaje de Descuento:");
-                        double pD = scanner.nextDouble();
-                        // Crear objeto del tipo PlanPostPagoMinutosMegasEconomico
-                        PlanPostPagoMinutosMegasEconomico planEconomico
-                                = new PlanPostPagoMinutosMegasEconomico(n3, p3, c3, b3, mC3,
-                                        moC3, numC3, minutos3, costoMi3, megas3, cG3, pD);
-                        planEconomico.calcularPagoMensual();
-                        // Guardar el objeto en la base de datos
-                        enlace.insertarCliente(planEconomico);
-
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutosMegas().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutosMegas().get(i));
+                        }
                         break;
-                    case 0:
 
-                        System.out.println("Fin del Programa....");
+                    case 5:
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutos().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutos().get(i));
+                        }
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMegas().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMegas().get(i));
+                        }
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutosMegas().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutosMegas().get(i));
+                        }
+                        for (int i = 0; i < c.obtenerDataPlanPostPagoMinutosMegasEconomico().size(); i++) {
+                            System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutosMegasEconomico().get(i));
+                        }
+                        break;
                     default:
-                        System.out.println("Opción inválida, intente nuevamente.");
-
+                        break;
                 }
-
-            }
-            // Obtener la información de los registros de la base de datos y presentarla
-            ArrayList<PlanCelular> listaPlanes = enlace.obtenerDataClientes();
-            for (PlanCelular plan : listaPlanes) {
-                System.out.println(plan.toString());
             }
 
-            enlace.obtenerConexion().close(); // Cerrar la conexión con la base de datos
-        } catch (Exception e) {
-        }
+            if (opcion == 0) {
+                System.out.println("Fin Del Programa --------");
+            }
+
+        } while (opcion != 0);
+    }
+
+    public static int interfaz1() {
+        Scanner sc = new Scanner(System.in);
+        System.out.printf("SELECIONE EL TIPO DE PLAN QUE DESEE INGRESAR\n"
+                + "--------------------------------------------------+\n"
+                + "1------- Plan post pago minutos megas economico        \n"
+                + "2------- Plan post pago minutos                        \n"
+                + "3------- Plan post pago megas                          \n"
+                + "4------- Plan post pago minutos megas                  \n"
+                + "--------------------------------------------------+\n");
+        int opcion = sc.nextInt();
+        System.out.println("--------------------------------------------------");
+        return opcion;
+    }
+
+    public static int interfaz2() {
+        Scanner sc = new Scanner(System.in);
+
+        System.out.printf("SELECIONE EL TIPO DE PLAN que desea PRESENTAR\n"
+                + "--------------------------------------------------+\n"
+                + "1------- Plan post pago minutos megas economico        \n"
+                + "2------- Plan post pago minutos                        \n"
+                + "3------- Plan post pago megas                          \n"
+                + "4------- Plan post pago minutos megas                  \n"
+                + "5------- PRESENTAR TODOS LOS PLANES            \n"
+                + "--------------------------------------------------+\n");
+        int opcion = sc.nextInt();
+        System.out.println("--------------------------------------------------");
+        return opcion;
     }
 }
