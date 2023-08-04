@@ -82,7 +82,7 @@ public class PlanPostPagoMinutosMegasEconomico extends PlanCelular {
     }
 @Override
     public String toString() {
-        return "\n------Costo de Plan Post Pago Mimutos Megas Economico------"
+        return "\n------Costo de Plan Post Pago Minutos Megas Economico------"
                 + "\nMinutos consumidos: " + minutos
                 + "\nCosto por minuto consumido: " + costoMinutos
                 + "\nMegas: " + megasGigas

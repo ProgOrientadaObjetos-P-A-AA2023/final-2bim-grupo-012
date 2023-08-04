@@ -133,6 +133,9 @@ public class Inicio {
                             break;
 
                         default:
+                             System.out.printf("--------------------------------------------------\n"
+                            + "Por favor ingresar una opcion Valida......"
+                            + "--------------------------------------------------\n");
                             break;
                     }
 

@@ -51,7 +51,7 @@ public class Enlace {
             String data = String.format("INSERT INTO planPostPagoMinutosMegasEconomico "
                     + "(nombreCliente,apellidoCliente,pasaporteCliente,"
                     + "ciudadCliente,barrioCliente,marcaCelular,modeloCelular,numeroCelular,minutos,"
-                    + "costoMinutos,megasGigas, costoGiga, porcentajeDescuento) values "
+                    + "costoMinutos,gigas, costoGigas, porcentajeDescuento) values "
                     + "('%s', '%s', '%s', '%s','%s', '%s', '%s', '%s', '%.2f', '%.2f', '%.2f', '%.2f', '%.2f')",
                     p.getCliente().obtenerNombreCliente(),
                     p.getCliente().obtenerApellidoCliente(),
@@ -86,8 +86,8 @@ public class Enlace {
             Statement statement = obtenerConexion().createStatement();
             String data = String.format("INSERT INTO planPostPagoMinutos"
                     + "(nombreCliente,apellidoCliente,pasaporteCliente,"
-                    + "ciudadCliente,barrioCliente,marcaCelular,modeloCelular,numeroCelular,minutosNacionales,"
-                    + "costoMinutosNacionales, minutosInternacional, costoMinutosInternacional) values "
+                    + "ciudadCliente,barrioCliente,marcaCelular,modeloCelular,numeroCelular,minutosNacional,"
+                    + "costoMinutosNacional, minutosInternacional, costoMinutosInternacional) values "
                     + "('%s', '%s', '%s', '%s','%s', '%s', '%s', '%s', '%.2f', '%.2f', '%.2f', '%.2f')",
                     p.getCliente().obtenerNombreCliente(),
                     p.getCliente().obtenerApellidoCliente(),
@@ -121,8 +121,8 @@ public class Enlace {
             Statement statement = obtenerConexion().createStatement();
             String data = String.format("INSERT INTO planPostPagoMegas"
                     + "(nombreCliente,apellidoCliente,pasaporteCliente,"
-                    + "ciudadCliente,barrioCliente,marcaCelular,modeloCelular,numeroCelular, megasGigas,"
-                    + "costoPorGiga, tarifaBase) values "
+                    + "ciudadCliente,barrioCliente,marcaCelular,modeloCelular,numeroCelular, gigas,"
+                    + "costoGigas, tarifaBase) values "
                     + "('%s', '%s', '%s', '%s','%s', '%s', '%s', '%s', '%.2f', '%.2f', '%.2f')",
                     p.getCliente().obtenerNombreCliente(),
                     p.getCliente().obtenerApellidoCliente(),
@@ -248,8 +248,8 @@ public class Enlace {
 
                 PlanPostPagoMinutos pm3 = new PlanPostPagoMinutos(
                         c,
-                        rs.getDouble("minutosNacionales"),
-                        rs.getDouble("costoMinutosNacionales"),
+                        rs.getDouble("minutosNacional"),
+                        rs.getDouble("costoMinutosNacional"),
                         rs.getDouble("minutosInternacional"),
                         rs.getDouble("costoMinutosInternacional"));
 
@@ -290,8 +290,8 @@ public class Enlace {
 
                 PlanPostPagoMegas pm3 = new PlanPostPagoMegas(
                         c,
-                        rs.getDouble("megas"),
-                        rs.getDouble("costoPorGiga"),
+                        rs.getDouble("gigas"),
+                        rs.getDouble("costoGigas"),
                         rs.getDouble("tarifaBase"));
 
                 pm3.calcularPagoMensual();
@@ -333,7 +333,7 @@ public class Enlace {
                         c,
                         rs.getDouble("minutos"),
                         rs.getDouble("costoMinutos"),
-                        rs.getDouble("megas"),
+                        rs.getDouble("gigas"),
                         rs.getDouble("costoPorGigas"));
 
                 pm3.calcularPagoMensual();
