@@ -22,6 +22,8 @@ public class Inicio {
         int opcion = 1, opcion2;
         String nombre, apellido, pasaporte, barrio, ciudad, marca, modelo, numeroCelular;
         do {
+            
+            
             System.out.printf("----------------Menú----------------------+\n"
                     + "1---------- Ingresar un Plan Celular                         \n"
                     + "2---------- Presentar los Planes Registrados                       \n"
