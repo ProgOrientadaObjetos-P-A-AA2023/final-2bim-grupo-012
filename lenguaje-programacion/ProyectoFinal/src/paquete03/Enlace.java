@@ -6,6 +6,8 @@
 package paquete03;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
+
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -342,11 +344,33 @@ public class Enlace {
 
             obtenerConexion().close();
         } catch (SQLException e) {
-            System.out.println("Exception: insertarPlanPostPagoMinutosMegas");
+            System.out.println("Exception: insertarPlanPostPagoMinutosMegas"); 
             System.out.println(e.getMessage());
 
         }
         return lista;
+    }
+      public String obtenerNombreCliente(int clienteId) {
+        String nombre = null;
+
+        try {
+            String query = "SELECT nombreCliente FROM Cliente WHERE id = ?";
+            PreparedStatement preparedStatement = conn.prepareStatement(query);
+            preparedStatement.setInt(1, clienteId);
+            ResultSet resultSet = preparedStatement.executeQuery();
+
+            if (resultSet.next()) {
+                nombre = resultSet.getString("nombreCliente");
+            }
+
+            resultSet.close();
+            preparedStatement.close();
+        } catch (SQLException e) {
+            System.out.println("Exception: obtenerNombreClientePorId");
+            System.out.println(e.getMessage());
+        }
+
+        return nombre;
     }
 
 }

@@ -27,6 +27,7 @@ public class Inicio {
                     + "2---------- Presentar los Planes Registrados                       \n"
                     + "0----------  Salir                                         \n"
                     + "Seleccione Una Opción+\n");
+
             opcion = sc.nextInt();
 
             System.out.println("--------------------------------------------------");
@@ -133,9 +134,9 @@ public class Inicio {
                             break;
 
                         default:
-                             System.out.printf("--------------------------------------------------\n"
-                            + "Por favor ingresar una opcion Valida......"
-                            + "--------------------------------------------------\n");
+                            System.out.printf("--------------------------------------------------\n"
+                                    + "Por favor ingresar una opcion Valida......"
+                                    + "--------------------------------------------------\n");
                             break;
                     }
 
@@ -156,6 +157,14 @@ public class Inicio {
                     case 1:
                         for (int i = 0; i < c.obtenerDataPlanPostPagoMinutosMegasEconomico().size(); i++) {
                             System.out.printf("%s\n", c.obtenerDataPlanPostPagoMinutosMegasEconomico().get(i));
+                            int clienteId = 1; 
+                            String nombreCliente = c.obtenerNombreCliente(clienteId);
+
+                            if (nombreCliente != null) {
+                                System.out.println("Nombre del cliente: " + nombreCliente);
+                            } else {
+                                System.out.println("Cliente no encontrado.");
+                            }
                         }
                         break;
                     case 2:
@@ -219,7 +228,7 @@ public class Inicio {
 
         System.out.printf("SELECIONE EL TIPO DE PLAN que desea PRESENTAR\n"
                 + "--------------------------------------------------+\n"
-                + "1------- Plan post pago minutos megas economico        \n"
+                + "1------- Plan post pago minutos megas economico     w   \n"
                 + "2------- Plan post pago minutos                        \n"
                 + "3------- Plan post pago megas                          \n"
                 + "4------- Plan post pago minutos megas                  \n"
@@ -229,4 +238,5 @@ public class Inicio {
         System.out.println("--------------------------------------------------");
         return opcion;
     }
+
 }
